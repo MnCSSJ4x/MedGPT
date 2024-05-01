@@ -12,7 +12,7 @@ from peft import LoraConfig
 from tqdm import tqdm
 from transformers import pipeline
 
-HF_TOKEN = "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"
+HF_TOKEN = "ENTER TOKEN"
 
 ppo_tokenizer = AutoTokenizer.from_pretrained(
     "vicgalle/gpt2-open-instruct-v1",
@@ -41,7 +41,7 @@ lora_config = LoraConfig(
 sent_kwargs = {"return_all_scores": True, "function_to_apply": "none", "max_length":400}
 
 model = AutoModelForCausalLMWithValueHead.from_pretrained(
-        "/home/sunnidhya/rlhf-experiments/rlhf/rlhf-experiments/rlhf-experiments/src/gpt2PPO_500",
+        "gpt2PPO_500",
         device_map="auto",
         use_auth_token=HF_TOKEN,
         peft_config=lora_config,
@@ -56,7 +56,7 @@ ref_model = AutoModelForCausalLMWithValueHead.from_pretrained(
 ppo_tokenizer.pad_token = ppo_tokenizer.eos_token
 
 
-reward_model = pipeline("text-classification", model="/home/sunnidhya/rlhf-experiments/rlhf/rlhf-experiments/rlhf-experiments/src/gpt2_reward_model_500")
+reward_model = pipeline("text-classification", model="gpt2_reward_model_500")
 
 def build_dataset_PPO(tokenizer, ppo_dataset) -> Dataset:
     train_ds = ppo_dataset
@@ -88,7 +88,7 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 
 def eval():
     torch.cuda.empty_cache()    
-    ppo_dataset = load_dataset("csv",data_files= "/home/sunnidhya/rlhf-experiments/rlhf/rlhf-experiments/rlhf-experiments/datasets/reward_dataset_500/reward_dataset_500.csv")
+    ppo_dataset = load_dataset("csv",data_files= "datasets/reward_dataset_500/reward_dataset_500.csv")
     ppo_dataset = build_dataset_PPO(ppo_tokenizer, ppo_dataset)
 
     #### Model Inspection 
