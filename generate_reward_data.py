@@ -6,7 +6,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM,BitsAndBytesConfig
 
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-hf_token = "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"
+hf_token = "HFTOKEN"
 model_id = "vicgalle/gpt2-open-instruct-v1"
 
 quantization_config = BitsAndBytesConfig(    
