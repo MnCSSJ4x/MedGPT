@@ -11,7 +11,7 @@ from peft import LoraConfig
 # from tqdm import tqdm
 # from transformers import pipeline
 
-HF_TOKEN = "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"
+HF_TOKEN = "ENTER_TOKEN"
 device = "cuda"
 ppo_tokenizer = AutoTokenizer.from_pretrained(
     "vicgalle/gpt2-open-instruct-v1",
