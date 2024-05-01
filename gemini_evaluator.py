@@ -33,7 +33,7 @@ model = genai.GenerativeModel(
 
 # convo = model.start_chat(history=[])
 
-df = pd.read_csv("/home/sunnidhya/rlhf-experiments/rlhf/rlhf-experiments/rlhf-experiments/src/EvalOutput500_1.csv")
+df = pd.read_csv("OUTPUTFILENAME")
 gemini_decision = []
 for index, row in tqdm(df.iterrows()):
     convo = model.start_chat(history=[])
